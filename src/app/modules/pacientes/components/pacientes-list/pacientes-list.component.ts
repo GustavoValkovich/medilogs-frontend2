@@ -12,7 +12,7 @@ import { PacienteService } from '../../../../core/services/paciente.service';
   styleUrls: ['./pacientes-list.component.scss']
 })
 export class PacientesListComponent implements OnInit {
-  displayedColumns: string[] = ['nombre', 'apellido', 'edad', 'obraSocial', 'acciones'];
+  displayedColumns: string[] = ['nombre', 'apellido', 'edad', 'obraSocial', 'email', 'acciones'];
   dataSource = new MatTableDataSource<Paciente>([]);
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;

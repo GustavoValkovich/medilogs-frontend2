@@ -12,7 +12,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 export class PacienteFormComponent implements OnInit {
   form!: FormGroup;
 
-  constructor(private fb: FormBuilder, private pacienteService: PacienteService, private router: Router, private snack: MatSnackBar) {}
+  constructor(private fb: FormBuilder, private pacienteService: PacienteService, public router: Router, private snack: MatSnackBar) {}
 
   ngOnInit(): void {
     this.form = this.fb.group({
@@ -28,12 +28,22 @@ export class PacienteFormComponent implements OnInit {
   }
 
   submit() {
-    if (this.form.invalid) return;
-    this.pacienteService.createPaciente(this.form.value).subscribe(() => {
+    if (this.form.invalid) {
+      this.form.markAllAsTouched();
+      this.snack.open('Formulario inválido. Completa los campos requeridos.', 'Cerrar', { duration: 3000 });
+      return;
+    }
+
+    const payload = this.form.value;
+    console.log('Enviando createPaciente payload:', payload);
+    this.pacienteService.createPaciente(payload).subscribe(() => {
+      console.log('Paciente creado correctamente');
       this.snack.open('Paciente creado', 'Cerrar', { duration: 2000 });
       this.router.navigate(['/pacientes']);
     }, err => {
-      this.snack.open('Error al crear paciente', 'Cerrar', { duration: 3000 });
+      console.error('Error al crear paciente:', err);
+      const msg = err?.error?.message || err?.message || 'Error al crear paciente';
+      this.snack.open(msg, 'Cerrar', { duration: 5000 });
     });
   }
 }

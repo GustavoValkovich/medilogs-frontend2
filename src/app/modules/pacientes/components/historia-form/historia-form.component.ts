@@ -13,7 +13,7 @@ export class HistoriaFormComponent implements OnInit {
   pacienteId!: string | number;
   form!: FormGroup;
 
-  constructor(private route: ActivatedRoute, private fb: FormBuilder, private pacienteService: PacienteService, private snack: MatSnackBar, private router: Router) {}
+  constructor(private route: ActivatedRoute, private fb: FormBuilder, private pacienteService: PacienteService, private snack: MatSnackBar, public router: Router) {}
 
   ngOnInit(): void {
     this.pacienteId = this.route.snapshot.paramMap.get('id') || '';
