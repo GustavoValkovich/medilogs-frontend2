@@ -1,0 +1,14 @@
+<mat-card>
+  <h2>Agregar Historia Clínica</h2>
+  <form [formGroup]="form" (ngSubmit)="submit()">
+    <mat-form-field appearance="fill" class="full"><mat-label>Motivo</mat-label><input matInput formControlName="motivo"></mat-form-field>
+    <mat-form-field appearance="fill" class="full"><mat-label>Diagnóstico</mat-label><textarea matInput formControlName="diagnostico"></textarea></mat-form-field>
+    <mat-form-field appearance="fill" class="full"><mat-label>Tratamiento</mat-label><textarea matInput formControlName="tratamiento"></textarea></mat-form-field>
+    <mat-form-field appearance="fill" class="full"><mat-label>Observaciones</mat-label><textarea matInput formControlName="observaciones"></textarea></mat-form-field>
+
+    <div style="margin-top:12px">
+      <button mat-flat-button color="primary" type="submit">Guardar Historia</button>
+      <button mat-button type="button" (click)="router.navigate(['/pacientes'])">Cancelar</button>
+    </div>
+  </form>
+</mat-card>
